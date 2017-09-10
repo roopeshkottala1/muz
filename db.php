@@ -1,5 +1,5 @@
 <?
-echo "starts..<br>";
+echo "starts>>>..<br>!!!";
 // $mysql_username = "root";
 // $mysql_pssword = "";
 // $db_name = "muzirisfarms";
@@ -9,7 +9,7 @@ echo "starts..<br>";
 $mysql_username = "mysqldbuser";
 $mysql_pssword = "Kerala@1234";
 $db_name =  'muziris';
-$mysql_host = "muziris-mysqldbserver";
+$mysql_host = "muziris-mysqldbserver.mysql.database.azure.com";
 
 
 error_reporting(255);
