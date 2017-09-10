@@ -1,15 +1,16 @@
 <?
-echo "starts>>>..v6";
-// $mysql_username = "root";
-// $mysql_pssword = "";
-// $db_name = "muzirisfarms";
-// $mysql_host = "localhost";
+echo "starts>>>..v8";
 
-$mysql_username = "mysqldbuser@muziris-mysqldbserver";
+$mysql_username = "root";
+$mysql_pssword = "";
+$db_name = "muzirisfarms_test";
+$mysql_host = "localhost";
+
+/*$mysql_username = "mysqldbuser@muziris-mysqldbserver";
 $mysql_pssword = "Kerala@1234";
 $db_name =  'muziris';
 $mysql_host = "muziris-mysqldbserver.mysql.database.azure.com";
-
+*/
 
 error_reporting(255);
 
@@ -28,12 +29,21 @@ function query($query, $act = true) {
 			   }
 			}
 			$mysqli = new mysqli( $mysql_host , $mysql_username, $mysql_pssword, ($act?$db_name:NULL));
-			if (mysqli_connect_errno())
+			if (mysqli_connect_errno()) {
+				print("Connect failed: ".mysqli_connect_error());
 			   throw new SQLException("Connect failed: ".mysqli_connect_error());
+			}
 		}
-		if ($act)
-			return $mysqli->query($query);
+		if ($act){
+			try{
+				return $mysqli->query($query) ;
+			}catch (Exception $ex) {
+				echo "ee>>>".$ex;		
+			}	
+			
+		}
 	} catch (Exception $ex) {
+		echo "Erorr>".$ex;
 		echo array_key_exists('nohtml', $_GET)?("<error>".$ex."</error>"):$ex;
 		die;
 	}
@@ -59,12 +69,24 @@ $time = time();
 $time_start = microtime(true);
 $_sid = $_COOKIE['asession'];
 echo "start query <br>";
-$result = query("select *from adminusers");
+
+query("CREATE TABLE  `contact` (
+  `id` int(11) NOT NULL,
+  `name` varchar(256) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `email` varchar(56) NOT NULL,
+  `productname` varchar(256) NOT NULL,
+  `quantity` int(3) NOT NULL,
+  `message` text NOT NULL,
+  `added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ");
+
+$result = query("show tables");
 $row = $result->fetch_array(MYSQLI_NUM);
 
 print_r($row);
 
-echo "ok......>v1"
+echo "ok......>v1";
 
 
 ?>
