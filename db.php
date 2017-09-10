@@ -1,12 +1,11 @@
 <?
-echo "starts>>>..<br>!!!";
+echo "starts>>>..v1";
 // $mysql_username = "root";
 // $mysql_pssword = "";
 // $db_name = "muzirisfarms";
 // $mysql_host = "localhost";
 
-
-$mysql_username = "mysqldbuser";
+$mysql_username = "mysqldbuser@muziris-mysqldbserver";
 $mysql_pssword = "Kerala@1234";
 $db_name =  'muziris';
 $mysql_host = "muziris-mysqldbserver.mysql.database.azure.com";
@@ -72,7 +71,7 @@ query("CREATE TABLE `adminusers` (
   `updated` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;");
 
-echo "ok......"
+echo "ok......>v1"
 
 
 ?>
