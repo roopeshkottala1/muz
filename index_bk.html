@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content=""> <title>Muziria Farms</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/modern-business.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   
+<style type="text/css">
+
+#marqueecontainer{
+position: relative;
+width: 100%; /*marquee width */
+height: 37px; /*marquee height */
+background-color: white;
+overflow: hidden;
+
+}
+
+</style>
+
+<script type="text/javascript">
+
+
+
+var delayb4scroll=3000 //Specify initial delay before marquee starts to scroll on page (2000=2 seconds)
+var marqueespeed=1 //Specify marquee scroll speed (larger is faster 1-10)
+var pauseit=1 //Pause marquee onMousever (0=no. 1=yes)?
+
+////NO NEED TO EDIT BELOW THIS LINE////////////
+
+var copyspeed=marqueespeed
+var pausespeed=(pauseit==0)? copyspeed: 0
+var actualheight=''
+
+function scrollmarquee(){
+if (parseInt(cross_marquee.style.top)>(actualheight*(-1)+8))
+cross_marquee.style.top=parseInt(cross_marquee.style.top)-copyspeed+"px"
+else
+cross_marquee.style.top=parseInt(marqueeheight)+8+"px"
+}
+
+function initializemarquee(){
+cross_marquee=document.getElementById("vmarquee")
+cross_marquee.style.top=0
+marqueeheight=document.getElementById("marqueecontainer").offsetHeight
+actualheight=cross_marquee.offsetHeight
+if (window.opera || navigator.userAgent.indexOf("Netscape/7")!=-1){ //if Opera or Netscape 7x, add scrollbars to scroll and exit
+cross_marquee.style.height=marqueeheight+"px"
+cross_marquee.style.overflow="scroll"
+return
+}
+setTimeout('lefttime=setInterval("scrollmarquee()",90)', delayb4scroll)
+}
+
+if (window.addEventListener)
+window.addEventListener("load", initializemarquee, false)
+else if (window.attachEvent)
+window.attachEvent("onload", initializemarquee)
+else if (document.getElementById)
+window.onload=initializemarquee
+
+
+</script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+           
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                   
+                </button>
+                 
+            
+                <a id="san" class="navbar-brand" href="index.html"><img src="img/logo.png" width="77" height="77" class="img-responsive"></a>    
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+       <ul class="nav navbar-nav navbar-right">
+                 <li><a href="index.html"><strong>Home</strong></a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.php">Products</a></li>
+            <li> <a href="contact.html">Contact</a> </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Header Carousel -->
+    <header id="myCarousel" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="fill" style="background-image:url(img/px1.jpg);"></div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url(img/px2.jpg);"></div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url(img/px3.jpg);"></div>
+            </div>
+             <div class="item">
+                <div class="fill" style="background-image:url(img/px4.jpg);"></div>
+            </div>
+             <div class="item">
+                <div class="fill" style="background-image:url(img/px5.jpg);"></div>
+            </div>
+            
+            
+            
+        </div>
+ <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+
+    </header>
+
+
+<!-- Page Content -->
+    <div class="container">
+     
+
+        <div class="row">
+        
+            <div class="col-lg-12">
+      
+               
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-arrow-circle-right"></i>&nbsp;About us</h4>
+                    </div>
+                  <div class="panel-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id sem purus. Proin ut posuere leo, non porta lectus. Nulla egestas, turpis quis luctus ultricies, massa neque mattis dolor, lacinia. Nulla convallis et tellus a ullamcorper. Maecenas viverra lobortis erat, non commodo augue volutpat vel. Pellentesque eget risus eros. Donec nec neque tortor. In ultrices diam quis est pretium dignissim.</p>
+                      <a href="nonRechargeableBatteries.html" class="btn btn-default">Learn More</a>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-arrow-circle-right"></i>&nbsp;Products </h4>
+                    </div>
+                  <div class="panel-body">
+                    <p><img src="img/rr.jpg" width="158" height="115" style=" float:left">The Ayurveda rishis had prescribed certain diets to fight cancer. one of them is <strong>Rakthashali</strong> rice which contains all essential minerals and abundant Oryzanol which has the property of Anti-carcinogenetic effect to inhibit tumor growth</p>
+                      <a href="LiFePo4.html" class="btn btn-default">Learn More</a>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-arrow-circle-right"></i>&nbsp;Contact</h4>
+                    </div>
+                  <div class="panel-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id sem purus. Proin ut posuere leo, non porta lectus. Nulla egestas, turpis quis luctus ultricies, massa neque mattis dolor, lacinia sagittis neque velit eu erat. Nulla convallis et tellus a ullamcorper. Maecenas viverra lobortis erat, non commodo augue volutpat vel. Pellentesque eget risus eros. Donec nec neque tortor. In ultrices diam quis est pretium dignissim.</p>
+                      <a href="standardChargers.html" class="btn btn-default">Learn More</a>
+                  </div>   
+                
+            </div>
+               
+
+                
+             
+        </div>
+    <hr>
+ <footer>
+            <div class="row">
+              <div class=" col-lg-12">
+                   <p>Copyright &copy; 2017  Muziria Farms. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+                </div>
+  
+
+   
+    </div>
+    
+
+ 
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+    <!-- Script to Activate the Carousel --><script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
+
+     
+
+
+
+     
+</body>
+
+</html>

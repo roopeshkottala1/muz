@@ -1,0 +1,176 @@
+YAHOO.namespace("domark");
+function modalClose (dialog) {
+	dialog.data.fadeOut('slow', function () {
+		dialog.container.hide('slow', function () {
+			dialog.overlay.fadeOut('slow', function () {
+				$.modal.close();
+			});
+		});
+	});
+}
+function modalOpen (dialog) {	
+	dialog.overlay.fadeIn('slow', function () {
+		dialog.container.show('slow', function () {
+			dialog.data.hide().slideDown('slow');	 
+		});
+	});
+}
+  
+
+ /* confirm box */ 
+
+function confirm(message, callback) {	
+	$('#confirm').modal({
+		close:false, 
+		overlayId:'confirmModalOverlay',
+		containerId:'confirmModalContainer', 
+		onShow: function (dialog) {
+			dialog.data.find('.message').append(message);
+		
+			// if the user clicks "yes"
+			dialog.data.find('.yes').click(function () {
+												 
+				//// call the callback
+				if ($.isFunction(callback)) {
+					callback.apply();				
+				} else {
+					document.location.href = callback;
+				}
+				// close the dialog
+				$.modal.close();
+			});
+		}
+	});
+}
+  //confirm box  ENDS here  
+
+function alert(message, callback) {
+	$('#alert').modal({
+		close:false, 
+		overlayId:'alertModalOverlay',
+		containerId:'alertModalContainer', 
+		onShow: function (dialog) {
+			dialog.data.find('.message').append(message);
+						// if the user clicks "yes"
+			dialog.data.find('.yes').click(function () {
+				// call the callback
+				if ($.isFunction(callback)) {
+					callback();
+				}
+				// close the dialog
+				$.modal.close();
+			});
+		}
+	});
+}
+ 
+var init = function() {	
+	YAHOO.util.Dom.get('waitDiv').style.display = '';
+	YAHOO.domark.wait = new YAHOO.widget.Dialog("waitDiv", { width : "250px", height : "70px", 
+															  fixedcenter : true, 
+															  visible : false,  
+															  constraintoviewport : false,
+															  draggable : false,
+															  modal : true,
+															  zIndex : 999999,
+															  close : false
+															 } );
+	YAHOO.domark.wait.render();
+	YAHOO.domark.wait.hide();
+	
+};
+YAHOO.util.Event.addListener(window, "load", init);
+
+
+var genFailure = function(o){
+	if(o.responseText !== undefined){
+		alert("Error interacting with server.\n\nHTTP status: " + o.status + "\nStatus code message: " + o.statusText);
+	} else
+		alert("Error interacting with server.");
+}
+var actSuccess = function(o){
+	if(o.responseText !== undefined){
+		var root = o.responseXML.documentElement;
+		YAHOO.domark.wait.hide();
+		if (root.nodeName == 'error') {	
+			var err = new Array();
+			for (i = 0; i < root.childNodes.length; i++) {
+				if (root.childNodes[i].nodeName != '#text' && root.childNodes[i].hasChildNodes) {					
+					if (!items) var items = root.childNodes[i].nodeName;
+					if(tipMsg) {
+						var divContent = ' <div class="signupBBdiv" id="error_'+root.childNodes[i].nodeName+'" style="display:none;"><div class="signupBBleft"></div><div class="signupBBcontent">'+root.childNodes[i].firstChild.nodeValue+'</div></div>';
+						$("#error_"+root.childNodes[i].nodeName).remove();
+						var tmpHtml = $("#"+root.childNodes[i].nodeName).parent().html() + divContent;
+						var tmpVal = $("#"+root.childNodes[i].nodeName).attr("value");
+						$("#"+root.childNodes[i].nodeName).parent().html(tmpHtml);
+						$("#"+root.childNodes[i].nodeName).attr({value:tmpVal});
+						$("#error_"+root.childNodes[i].nodeName).animate({height:'show', opacity:'show'}, "slow");
+					}
+					err.push(root.childNodes[i].firstChild.nodeValue);
+				}
+			}
+			if(dispMsg == "on")	alert("<div align='left'><i>Some required details are missing from the information you provided:</i></div><br/><div align='left'>"+err.join("<br/>")+"</div>", showBox);
+				$("input, textarea, select").each(function() {
+					$(this).click(function() {
+						 $("#error_"+$(this).attr("id")).animate({height:'hide', opacity:'hide'}, "slow");
+					});
+				});
+				$.scrollTo('#'+items, 80);
+			//}
+		} else {			
+			if(dispMsg == "on" && value(root, 'msg') !== undefined){ 
+				alert("<div align='center'>"+ value(root, 'msg')+ "</div><br/>", pageHandle); 
+			} else {
+				alert(o.responseText);	
+				if(successFunc == "local") processResult(o);
+				else document.location.href = redirectPage;
+			}
+		}
+	}
+	function pageHandle () {		
+		if(successFunc == "local") processResult(o);
+		else document.location.href = redirectPage;
+	}
+}
+
+function showBox() {
+	if(showPop!='')
+		eval('showPop').show();
+}
+var successFunc = "global";
+var dispMsg = "off";
+var tipMsg = false;
+var showPop = false;
+var redirectPage;
+function submitForm(form, actPage, redirect, manual, upload, disp, tooltip, showYUI) {	
+	YAHOO.domark.wait.show();
+	YAHOO.util.Connect.setForm(form, upload);
+	if(!actPage) return;
+	redirectPage = redirect;
+	if(manual) successFunc = "local";
+	if(disp) dispMsg = "on";	
+	if(tooltip) tipMsg = true;
+	if(showYUI) showPop = showYUI;
+	
+	if(tipMsg) {
+		$(document).ready(function(){
+			$("input").each(function() {
+				 $(this).click(function() {
+					  $("#error_"+$(this).attr("id")).animate({height:'hide', opacity:'hide'}, "slow");
+				});
+			});
+		});
+	}
+	var request = YAHOO.util.Connect.asyncRequest('POST', actPage + "&nohtml="+Math.random(), actHandle);
+}
+var actHandle =
+{ 
+	upload:actSuccess,
+	success:actSuccess,
+	failure:genFailure
+};
+
+
+function value(root, node) {
+ 	return (root.getElementsByTagName(node) && root.getElementsByTagName(node)[0].hasChildNodes && root.getElementsByTagName(node)[0].firstChild && root.getElementsByTagName(node)[0].firstChild.nodeValue)?root.getElementsByTagName(node)[0].firstChild.nodeValue:'';
+}
