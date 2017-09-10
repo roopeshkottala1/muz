@@ -1,16 +1,16 @@
 <?
-echo "starts>>>..v8";
+echo "starts>>>..v9";
 
 $mysql_username = "root";
 $mysql_pssword = "";
 $db_name = "muzirisfarms_test";
 $mysql_host = "localhost";
 
-/*$mysql_username = "mysqldbuser@muziris-mysqldbserver";
+$mysql_username = "mysqldbuser@muziris-mysqldbserver";
 $mysql_pssword = "Kerala@1234";
 $db_name =  'muziris';
 $mysql_host = "muziris-mysqldbserver.mysql.database.azure.com";
-*/
+
 
 error_reporting(255);
 
