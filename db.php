@@ -1,7 +1,5 @@
 <?
 echo "starts..<br>";
-<?
-
 // $mysql_username = "root";
 // $mysql_pssword = "";
 // $db_name = "muzirisfarms";
