@@ -1,5 +1,5 @@
 <?
-echo "starts>>>..v1";
+echo "starts>>>..v3";
 // $mysql_username = "root";
 // $mysql_pssword = "";
 // $db_name = "muzirisfarms";
@@ -58,13 +58,13 @@ $_page = array();
 $time = time();
 $time_start = microtime(true);
 $_sid = $_COOKIE['asession'];
-
+echo "start query <br>"
 query("INSERT INTO `adminusers` (`id`, `name`, `email`, `username`, `pass`, `status`, `level`, `created`, `updated`) VALUES
 (1, 'admin', NULL, 'admin', 'b59c67bf196a4758191e42f76670ceba', 1, '1', '2012-10-19 11:35:10', '2012-10-19 11:35:14'),
 (64, 'roopesh k', 'roopesh.kottala@gmail.com', 'roopesh', 'b576b2c83bda27611a15e3a0fe8bf665', 1, '2', '2017-07-01 14:17:04', '2017-07-01 14:17:04');");
 
-$rs = query("select *from adminusers");
-$row = $rs->fetch_array();
+$result = query("select *from adminusers");
+$row = $result->fetch_array(MYSQLI_NUM);
 
 print_r(row);
 
